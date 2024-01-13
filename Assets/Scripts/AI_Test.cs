@@ -11,6 +11,7 @@ public class AI_Test : MonoBehaviour
     public float AvoidancePredictionTime;
     public float AgentSpeed;
     public Transform Destination;
+    public float StoppingDistance;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class AI_Test : MonoBehaviour
         agent.obstacleAvoidanceType = AvoidanceType;
         agent.speed = AgentSpeed;
         agent.SetDestination(Destination.position);
-
+        agent.stoppingDistance = StoppingDistance;
     }
 
     // Update is called once per frame
@@ -27,4 +28,5 @@ public class AI_Test : MonoBehaviour
     {
         
     }
+
 }
