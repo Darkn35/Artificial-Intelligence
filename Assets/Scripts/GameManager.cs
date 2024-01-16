@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,9 +16,22 @@ public class GameManager : MonoBehaviour
     }
 
     public List<AIVariants> aiVariants;
+    public Transform canvasTransform;
+    public TextMeshProUGUI textMeshProUGUIPrefab;
     // Start is called before the first frame update
     void Start()
     {
+        SpawnObjects spawnObjects = GetComponent<SpawnObjects>();
+
+        foreach (GameObject aiObj in spawnObjects.spawnedAIPrefab)
+        {
+            var aiVariantTransform = new AIVariants();
+            aiVariantTransform.targetAI = aiObj.transform;
+            TextMeshProUGUI textPrefab = Instantiate(textMeshProUGUIPrefab, aiObj.transform.position, Quaternion.identity);
+            textPrefab.transform.SetParent(canvasTransform);
+            aiVariantTransform.textMeshPro = textPrefab;
+            aiVariants.Add(aiVariantTransform);
+        }
     }
 
     // Update is called once per frame

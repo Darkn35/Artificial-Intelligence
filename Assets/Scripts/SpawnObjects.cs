@@ -8,8 +8,10 @@ public class SpawnObjects : MonoBehaviour
     public List<Transform> BlueDestination, RedDestination, GreenDestination, YellowDestination;
     public Transform BlueParent, RedParent, GreenParent, YellowParent;
     public GameObject blueAI, redAI, greenAI, yellowAI;
+
+    public List<GameObject> spawnedAIPrefab;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         foreach (Transform t in BlueParent.GetComponentInChildren<Transform>())
         {
@@ -36,45 +38,49 @@ public class SpawnObjects : MonoBehaviour
         foreach (Transform t in BlueDestination)
         {
             GameObject AIPrefab = Instantiate(blueAI, RedDestination[index].position, Quaternion.identity);
+            spawnedAIPrefab.Add(AIPrefab);
             AIPrefab.GetComponent<AI_Test>().Destination = t;
             AIPrefab.GetComponent<AI_Test>().AgentSpeed = 3.5f;
             AIPrefab.GetComponent<AI_Test>().AvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.HighQualityObstacleAvoidance;
             AIPrefab.GetComponent<AI_Test>().AvoidancePredictionTime = 5f;
             AIPrefab.GetComponent<AI_Test>().StoppingDistance = 0f;
-            index = index + 1;
+            index++;
         }
         index = 0;
         foreach (Transform t in RedDestination)
         {
             GameObject AIPrefab = Instantiate(redAI, BlueDestination[index].position, Quaternion.identity);
+            spawnedAIPrefab.Add(AIPrefab);
             AIPrefab.GetComponent<AI_Test>().Destination = t;
             AIPrefab.GetComponent<AI_Test>().AgentSpeed = 3.5f;
             AIPrefab.GetComponent<AI_Test>().AvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.MedQualityObstacleAvoidance;
             AIPrefab.GetComponent<AI_Test>().AvoidancePredictionTime = 5f;
             AIPrefab.GetComponent<AI_Test>().StoppingDistance = 0f;
-            index = index + 1;
+            index++;
         }
         index = 0;
         foreach (Transform t in GreenDestination)
         {
             GameObject AIPrefab = Instantiate(greenAI, YellowDestination[index].position, Quaternion.identity);
+            spawnedAIPrefab.Add(AIPrefab);
             AIPrefab.GetComponent<AI_Test>().Destination = t;
             AIPrefab.GetComponent<AI_Test>().AgentSpeed = 3.5f;
             AIPrefab.GetComponent<AI_Test>().AvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.LowQualityObstacleAvoidance;
             AIPrefab.GetComponent<AI_Test>().AvoidancePredictionTime = 5f;
             AIPrefab.GetComponent<AI_Test>().StoppingDistance = 0f;
-            index = index + 1;
+            index++;
         }
         index = 0;
         foreach (Transform t in YellowDestination)
         {
             GameObject AIPrefab = Instantiate(yellowAI, GreenDestination[index].position, Quaternion.identity);
+            spawnedAIPrefab.Add(AIPrefab);
             AIPrefab.GetComponent<AI_Test>().Destination = t;
             AIPrefab.GetComponent<AI_Test>().AgentSpeed = 3.5f;
             AIPrefab.GetComponent<AI_Test>().AvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.MedQualityObstacleAvoidance;
             AIPrefab.GetComponent<AI_Test>().AvoidancePredictionTime = 5f;
             AIPrefab.GetComponent<AI_Test>().StoppingDistance = 0f;
-            index = index + 1;
+            index++;
         }
     }
 
